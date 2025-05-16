@@ -16,26 +16,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button loadButton1 = findViewById(R.id.button);
-        Button loadButton2 = findViewById(R.id.button2);
+        Button loadButtona = findViewById(R.id.button);
+        Button loadButtonb = findViewById(R.id.button2);
+        Button loadButtonc = findViewById(R.id.button3);
 
-        loadButton1.setOnClickListener(new View.OnClickListener() {
+        loadButtona.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadSimpleFragment1();
+                loadSimpleFragmenta();
             }
         });
 
-        loadButton2.setOnClickListener(new View.OnClickListener() {
+        loadButtonb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadSimpleFragment2();
+                loadSimpleFragmentb();
             }
+        });
+
+        loadButtonc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { loadSimpleFragmentc(); }
         });
 
     }
 
-    private void loadSimpleFragment1() {
+    private void loadSimpleFragmenta() {
 
         Fragment simpleFragment = new fragment_a();
 
@@ -46,12 +52,12 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
 
-        fragmentTransaction.replace(R.id.fragment_container_dynamic, simpleFragment);
+        fragmentTransaction.replace(R.id.fragment_container_dynamic, simpleFragment).addToBackStack(null);
 
         fragmentTransaction.commit();
     }
 
-    private void loadSimpleFragment2() {
+    private void loadSimpleFragmentb() {
 
         Fragment simpleFragment = new fragment_b();
 
@@ -62,7 +68,23 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
 
-        fragmentTransaction.replace(R.id.fragment_container_dynamic, simpleFragment);
+        fragmentTransaction.add(R.id.fragment_container_dynamic, simpleFragment);
+
+        fragmentTransaction.commit();
+    }
+
+    private void loadSimpleFragmentc() {
+
+        Fragment simpleFragment = new fragment_c();
+
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+
+        fragmentTransaction.add(R.id.fragment_container_dynamic, simpleFragment);
 
         fragmentTransaction.commit();
     }
