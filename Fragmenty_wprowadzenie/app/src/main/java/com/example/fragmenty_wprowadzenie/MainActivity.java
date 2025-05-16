@@ -23,25 +23,41 @@ public class MainActivity extends AppCompatActivity {
         loadButtona.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadSimpleFragmenta();
+                loadFragment(new fragment_a(),false);
             }
         });
 
         loadButtonb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadSimpleFragmentb();
+                loadFragment(new fragment_b(),true);
             }
         });
 
         loadButtonc.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { loadSimpleFragmentc(); }
+            public void onClick(View view) { loadFragment(new fragment_c(),true); }
         });
 
+        if(savedInstanceState == null){
+            loadFragment(new fragment_a(),false);
+        }
+    }
+    private  void  loadFragment(Fragment fragment,boolean addToBackStack){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.replace(R.id.fragment_container_dynamic,fragment);
+
+        if(addToBackStack){
+            fragmentTransaction.addToBackStack(null);
+        }
+
+        fragmentTransaction.commit();
     }
 
-    private void loadSimpleFragmenta() {
+    /*private void loadSimpleFragmenta() {
 
         Fragment simpleFragment = new fragment_a();
 
@@ -68,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
 
-        fragmentTransaction.add(R.id.fragment_container_dynamic, simpleFragment);
+        fragmentTransaction.add(R.id.fragment_container_dynamic, simpleFragment).addToBackStack(null);
 
         fragmentTransaction.commit();
     }
@@ -84,8 +100,8 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
 
-        fragmentTransaction.add(R.id.fragment_container_dynamic, simpleFragment);
+        fragmentTransaction.add(R.id.fragment_container_dynamic, simpleFragment).addToBackStack(null);
 
         fragmentTransaction.commit();
-    }
+    }*/
 }
